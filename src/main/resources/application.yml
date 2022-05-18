@@ -1,0 +1,37 @@
+spring:
+  mvc:
+    view:
+      prefix: /resources/templates/
+      suffix: .html
+
+  h2:
+    console:
+      enabled: true
+
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+    defer-datasource-initialization: true
+
+
+# chunnycode-spring-boot-jwt-tutorial-secret-chunnycode-tech-spring-boot-jwt-tutorial-secret to base64
+jwt:
+  header: Authorization
+  secret: Y2h1bm55Y29kZS1zcHJpbmctYm9vdC1qd3QtdHV0b3JpYWwtc2VjcmV0LWNodW5ueWNvZGUtdGVjaC1zcHJpbmctYm9vdC1qd3QtdHV0b3JpYWwtc2VjcmV0
+  token-validity-in-seconds: 86400
+
+
+secret:
+  access: acc
+  refresh: ref
