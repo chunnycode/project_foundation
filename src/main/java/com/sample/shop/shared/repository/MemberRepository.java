@@ -1,6 +1,6 @@
-package com.sample.shop.member.repository;
+package com.sample.shop.shared.repository;
 
-import com.sample.shop.member.entity.Member;
+import com.sample.shop.login.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
