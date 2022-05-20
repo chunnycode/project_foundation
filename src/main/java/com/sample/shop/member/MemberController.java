@@ -1,6 +1,7 @@
 package com.sample.shop.member;
 
-import com.sample.shop.dto.MemberRequest;
+import com.sample.shop.member.dto.LoginDto;
+import com.sample.shop.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -15,9 +16,9 @@ public class MemberController {
 	private final MemberService memberService;
 
 	@PostMapping("/login")
-	public ResponseEntity login(@RequestBody MemberRequest memberRequest) throws Exception {
+	public ResponseEntity login(@RequestBody LoginDto loginDto) throws Exception {
 		return ResponseEntity
 				.ok()
-				.body(memberService.doLogin(memberRequest));
+				.body(memberService.doLogin(loginDto));
 	}
 }

@@ -1,4 +1,4 @@
-package com.sample.shop.dto;
+package com.sample.shop.member.jwt;
 
 import lombok.Builder;
 import lombok.Getter;

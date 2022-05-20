@@ -1,18 +1,16 @@
-package com.sample.shop.member;
+package com.sample.shop.member.service;
 
-import com.sample.shop.dto.MemberRequest;
-import com.sample.shop.dto.TokenResponse;
-import com.sample.shop.entity.Member;
-import com.sample.shop.repository.MemberRepository;
+import com.sample.shop.member.dto.LoginDto;
+import com.sample.shop.member.jwt.TokenResponse;
+import com.sample.shop.member.entity.Member;
+import com.sample.shop.member.repository.MemberRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Base64;
 import java.util.Date;
 import java.util.Optional;
 
@@ -32,14 +30,14 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	@Transactional
-	public TokenResponse doLogin(MemberRequest memberRequest) throws Exception {
-		Optional<Member> test = memberRepository.findByMemberName(memberRequest.getMemberName());
-		Member member = memberRepository.findByMemberName(memberRequest.getMemberName())
+	public TokenResponse doLogin(LoginDto loginDto) throws Exception {
+		Optional<Member> test = memberRepository.findByMemberName(loginDto.getMemberName());
+		Member member = memberRepository.findByMemberName(loginDto.getMemberName())
 				.orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
 	/*	Auth auth = authRepository.findByMemberId(member.getMemberId())
 				.orElseThrow(() -> new IllegalArgumentException("Token 이 존재하지 않습니다."));*/
 //		if (!passwordEncoder.matches(memberRequest.getPassword(), member.getPassword())) {
-		if (!memberRequest.getPassword().equals(member.getPassword())) {
+		if (!loginDto.getPassword().equals(member.getPassword())) {
 			throw new Exception("비밀번호가 일치하지 않습니다.");
 		}
 
