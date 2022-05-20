@@ -24,14 +24,10 @@ spring:
         show_sql: true
     defer-datasource-initialization: true
 
-
-# chunnycode-spring-boot-jwt-tutorial-secret-chunnycode-tech-spring-boot-jwt-tutorial-secret to base64
-jwt:
-  header: Authorization
-  secret: Y2h1bm55Y29kZS1zcHJpbmctYm9vdC1qd3QtdHV0b3JpYWwtc2VjcmV0LWNodW5ueWNvZGUtdGVjaC1zcHJpbmctYm9vdC1qd3QtdHV0b3JpYWwtc2VjcmV0
-  token-validity-in-seconds: 86400
-
-
+#jwt:
+#  header: Authorization
+#  secret: Y2h1bm55Y29kZS1zcHJpbmctYm9vdC1qd3QtdHV0b3JpYWwtc2VjcmV0LWNodW5ueWNvZGUtdGVjaC1zcHJpbmctYm9vdC1qd3QtdHV0b3JpYWwtc2VjcmV0
+#  token-validity-in-seconds: 86400
 secret:
-  access: acc
-  refresh: ref
+  access: chunnycode-spring-boot-jwt-tutorial-secret-chunnycode-tech-spring-boot-jwt-tutorial-secret
+  refresh:
