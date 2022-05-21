@@ -2,10 +2,7 @@ package com.sample.shop.login.entity;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "authority")
@@ -16,7 +13,26 @@ import javax.persistence.Table;
 @NoArgsConstructor
 public class Authority {
 
+
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
+	private Long id;
+
 	@Column(name = "authority_name", length = 50)
 	private String authorityName;
+
+	private String accessToken;
+	private String refreshToken;
+
+	@ManyToOne
+	@JoinColumn(name = "member_idx")
+	private Member member;
+
+	public void accessUpdate(String accessToken) {
+		this.accessToken = accessToken;
+	}
+
+	public void refreshUpdate(String refreshToken) {
+		this.refreshToken = refreshToken;
+	}
 }

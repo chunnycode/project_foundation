@@ -16,9 +16,12 @@ import java.util.Set;
 public class Member {
 
 	@Id
-	@Column(name = "member_id")
+	@Column(name = "member_idx")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long memberId;
+	private Long memberIdx;
+
+	@Column(name = "member_id", length = 50, unique = true)
+	private String memberId;
 
 	@Column(name = "member_name", length = 50, unique = true)
 	private String memberName;
@@ -26,16 +29,13 @@ public class Member {
 	@Column(name = "password", length = 100)
 	private String password;
 
-	@Column(name = "nickname", length = 50)
-	private String nickname;
-
 	@Column(name = "activated")
 	private boolean activated;
 
 	@ManyToMany
 	@JoinTable(
 			name = "member_authority",
-			joinColumns = {@JoinColumn(name = "member_id", referencedColumnName = "member_id")},
+			joinColumns = {@JoinColumn(name = "member_idx", referencedColumnName = "member_idx")},
 			inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "authority_name")})
 	private Set<Authority> authorities;
 }

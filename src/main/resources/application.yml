@@ -29,5 +29,5 @@ spring:
 #  secret: Y2h1bm55Y29kZS1zcHJpbmctYm9vdC1qd3QtdHV0b3JpYWwtc2VjcmV0LWNodW5ueWNvZGUtdGVjaC1zcHJpbmctYm9vdC1qd3QtdHV0b3JpYWwtc2VjcmV0
 #  token-validity-in-seconds: 86400
 secret:
-  access: chunnycode-spring-boot-jwt-tutorial-secret-chunnycode-tech-spring-boot-jwt-tutorial-secret
-  refresh:
+  access: chunnycode-spring-boot-jwt-practice-secret-chunnycode-tech-spring-boot-jwt-practice-secret
+  refresh: chunnycode-spring-boot-jwt-practice-refresh-chunnycode-tech-spring-boot-jwt-practice-refresh
