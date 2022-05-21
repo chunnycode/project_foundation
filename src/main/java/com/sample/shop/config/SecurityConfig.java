@@ -16,6 +16,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 						,"/favicon.ico"
 						,"/api/**"
 						,"/api/member/**"
+						,"/api/auth/**"
 						,"/member/**"
 				);
 	}
