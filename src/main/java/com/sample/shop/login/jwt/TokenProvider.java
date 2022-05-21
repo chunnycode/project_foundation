@@ -20,7 +20,7 @@ public class TokenProvider {
     @Value("${secret.access}")
     private String secretKey;
 
-    private final long accessTokenValidTime = 1 * 60 * 1000L;
+    private final long accessTokenValidTime = 60 * 1000L; // 1분
 
     @PostConstruct
     protected void init() {
@@ -28,8 +28,10 @@ public class TokenProvider {
     }
 
     public String createToken(String memberName){
+
         Claims claims = Jwts.claims();  // JWT payload 에 저장되는 정보단위
         claims.put("memberName", memberName);
+
         Date now = new Date();
         return Jwts.builder()
                 .setClaims(claims) // 정보 저장
