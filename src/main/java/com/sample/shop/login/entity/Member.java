@@ -29,13 +29,14 @@ public class Member {
 	@Column(name = "password", length = 100)
 	private String password;
 
-	@Column(name = "activated")
-	private boolean activated;
+	private String accessToken;
+	private String refreshToken;
 
-	@ManyToMany
-	@JoinTable(
-			name = "member_authority",
-			joinColumns = {@JoinColumn(name = "member_idx", referencedColumnName = "member_idx")},
-			inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "authority_name")})
-	private Set<Authority> authorities;
+	public void accessUpdate(String accessToken) {
+		this.accessToken = accessToken;
+	}
+
+	public void refreshUpdate(String refreshToken) {
+		this.refreshToken = refreshToken;
+	}
 }

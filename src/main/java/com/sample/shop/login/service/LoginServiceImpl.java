@@ -15,13 +15,13 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.Date;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class LoginServiceImpl implements LoginService{
 
     private final MemberRepository memberRepository;
-    private final AuthorityRepository authorityRepository;
     private final TokenProvider tokenProvider;
 
     @Override
@@ -30,14 +30,15 @@ public class LoginServiceImpl implements LoginService{
 
         Member member = memberRepository.findByMemberId(loginDto.getMemberId())
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
-//        Authority authority = authorityRepository.findByMember(member.getMemberIdx())
-//                .orElseThrow(() -> new IllegalArgumentException("토큰이 존재하지 않습니다."));
         if (!loginDto.getPassword().equals(member.getPassword())) {
             throw new Exception("비밀번호가 일치하지 않습니다.");
         }
 
         String accessToken = tokenProvider.createAccessToken(member.getMemberId());
         String refreshToken = tokenProvider.createRefreshToken(member.getMemberId());
+
+        member.accessUpdate(accessToken);
+        member.refreshUpdate(refreshToken);   //DB Refresh 토큰 갱신
 
         return TokenResponse.builder()
                 .ACCESS_TOKEN(accessToken)
