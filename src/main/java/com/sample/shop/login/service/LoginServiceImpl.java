@@ -51,28 +51,33 @@ public class LoginServiceImpl implements LoginService{
     @Transactional
     public TokenResponse reissueToken(HttpServletRequest request){
 
-//        String accessToken = tokenProvider.resolveAccessToken(request);
+        String accessToken = null;
         String refreshToken = tokenProvider.resolveRefreshToken(request);
 
         if(tokenProvider.isValidRefreshToken(refreshToken)){     //들어온 Refresh 토큰이 유효한지
-           /* log.info("Refresh Token is valid.");
+
+            log.info("Refresh Token is valid.");
             Claims claimsToken = tokenProvider.getClaimsRefreshToken(refreshToken);
-            String userId = (String)claimsToken.get("memberId");
-            Optional<User> user = userRepository.findByUserId(userId);
-            String tokenFromDB = authRepository.findByUserId(user.get().getId()).get().getRefreshToken();
-            System.out.println("tokenFromDB = " + tokenFromDB);
-            if(refreshToken.equals(tokenFromDB)) {   //DB의 refresh토큰과 지금들어온 토큰이 같은지 확인
-                System.out.println("Access 토큰 재발급 완료");
-                accessToken = tokenProvider.createAccessToken(userId);
+
+            String memberId = (String)claimsToken.get("memberId");
+            Optional<Member> member = memberRepository.findByMemberId(memberId);
+            String savedToken =  member.get().getRefreshToken();
+            log.info("Saved Token is " + savedToken);
+
+            if(refreshToken.equals(savedToken)) {
+                log.info("Access reissued.");
+                accessToken = tokenProvider.createAccessToken(memberId);
+            } else{
+                log.info("Refresh Token Tampered.");
             }
-            else{
-                log.info("Refresh Token Tampered");
-            }*/
         } else{
             // Refresh Token is not valid.
         }
 
-        return null;
+        return TokenResponse.builder()
+                .ACCESS_TOKEN(accessToken)
+                .REFRESH_TOKEN(refreshToken)
+                .build();
     }
 
 
