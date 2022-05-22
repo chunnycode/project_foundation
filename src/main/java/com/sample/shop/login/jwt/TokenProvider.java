@@ -22,8 +22,8 @@ public class TokenProvider {
     @Value("${secret.refresh}")
     private String refreshKey;
 
-    private final long accessTokenValidTime = 60 * 1000L; // 1분
-    private final long refreshTokenValidTime =  7 * 24 * 60 * 60 * 1000L;   // 1주
+    private final long accessTokenValidTime = 60 * 60 * 1000L; // 1 hour
+    private final long refreshTokenValidTime =  7 * 24 * 60 * 60 * 1000L;   // 1 week
 
     @PostConstruct
     protected void init() {
@@ -58,5 +58,33 @@ public class TokenProvider {
                 .compact();
     }
 
+    public Claims getClaimsFormToken(String token) {
+        Claims claims = Jwts.parserBuilder()
+                .setSigningKey(DatatypeConverter.parseBase64Binary(secretKey))
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+
+        return claims;
+    }
+
+    public boolean isValidAccessToken(String token) {
+        log.info("isValidToken is : " +token);
+        try {
+            Claims accessClaims = getClaimsFormToken(token);
+            log.info("Access expireTime: " + accessClaims.getExpiration());
+            log.info("Access userId: " + accessClaims.get("memberName"));
+            return true;
+        } catch (ExpiredJwtException exception) {
+            log.info("Token Expired memberName : " + exception.getClaims().get("memberName"));
+            return false;
+        } catch (JwtException exception) {
+            log.info("Token Tampered");
+            return false;
+        } catch (NullPointerException exception) {
+            log.info("Token is null");
+            return false;
+        }
+    }
 
 }
