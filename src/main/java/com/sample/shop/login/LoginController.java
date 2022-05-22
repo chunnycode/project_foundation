@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,5 +34,15 @@ public class LoginController {
                 .ok()
                 .body("passed");
     }
+
+    //토큰 재발급 요청
+    @PostMapping("/reissue")
+    public ResponseEntity reissueToken(HttpServletRequest request) throws Exception {
+        return ResponseEntity
+                .ok()
+                .body(loginService.reissueToken(request));
+    }
+
+
 
 }

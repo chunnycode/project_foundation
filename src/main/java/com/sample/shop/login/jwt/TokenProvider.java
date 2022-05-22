@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
 import javax.xml.bind.DatatypeConverter;
 import java.util.Base64;
 import java.util.Date;
@@ -58,31 +59,67 @@ public class TokenProvider {
                 .compact();
     }
 
-    public Claims getClaimsFormToken(String token) {
-        Claims claims = Jwts.parserBuilder()
+    public String resolveAccessToken(HttpServletRequest request) {
+        log.info("AccessToken is " + request.getHeader("accessToken"));
+        return request.getHeader("accessToken");
+    }
+
+    public String resolveRefreshToken(HttpServletRequest request) {
+        log.info("RefreshToken is " + request.getHeader("RefreshToken"));
+        return request.getHeader("refreshToken");
+    }
+
+    public Claims getClaimsAccessToken(String token) {
+        return Jwts.parserBuilder()
                 .setSigningKey(DatatypeConverter.parseBase64Binary(secretKey))
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
+    }
 
-        return claims;
+    public Claims getClaimsRefreshToken(String token) {
+        return Jwts.parserBuilder()
+                .setSigningKey(DatatypeConverter.parseBase64Binary(refreshKey))
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
     }
 
     public boolean isValidAccessToken(String token) {
-        log.info("isValidToken is : " +token);
+        log.info("isValidToken is : " + token);
         try {
-            Claims accessClaims = getClaimsFormToken(token);
+            Claims accessClaims = getClaimsAccessToken(token);
             log.info("Access expireTime: " + accessClaims.getExpiration());
-            log.info("Access userId: " + accessClaims.get("memberName"));
+            log.info("Access memberId: " + accessClaims.get("memberId"));
             return true;
         } catch (ExpiredJwtException exception) {
-            log.info("Token Expired memberName : " + exception.getClaims().get("memberName"));
+            log.info("Token Expired memberId : " + exception.getClaims().get("memberId"));
             return false;
         } catch (JwtException exception) {
             log.info("Token Tampered");
             return false;
         } catch (NullPointerException exception) {
             log.info("Token is null");
+            return false;
+        }
+    }
+
+    public boolean isValidRefreshToken(String token){
+        log.info("isValidRefreshToken is " + token);
+
+        try {
+            Claims accessClaims = getClaimsRefreshToken(token);
+            System.out.println("Refresh expireTime: " + accessClaims.getExpiration());
+            System.out.println("Refresh memberId: " + accessClaims.get("memberId"));
+            return true;
+        } catch (ExpiredJwtException exception) {
+            System.out.println("Token Expired memberName : " + exception.getClaims().get("memberId"));
+            return false;
+        } catch (JwtException exception) {
+            System.out.println("Token Tampered");
+            return false;
+        } catch (NullPointerException exception) {
+            System.out.println("Token is null");
             return false;
         }
     }
