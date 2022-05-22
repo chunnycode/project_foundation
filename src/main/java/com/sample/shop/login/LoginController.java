@@ -28,7 +28,7 @@ public class LoginController {
 
 
     @GetMapping("/test")
-    public ResponseEntity check(@RequestBody LoginDto loginDto) throws Exception {
+    public ResponseEntity check() throws Exception {
         return ResponseEntity
                 .ok()
                 .body("passed");
