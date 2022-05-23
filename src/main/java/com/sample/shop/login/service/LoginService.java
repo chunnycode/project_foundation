@@ -7,5 +7,5 @@ import javax.servlet.http.HttpServletRequest;
 
 public interface LoginService {
     TokenResponse doLogin(LoginDto loginDto) throws Exception;
-    TokenResponse reissueToken(HttpServletRequest request);
+    TokenResponse issueAccessToken(HttpServletRequest request) throws Exception;
 }

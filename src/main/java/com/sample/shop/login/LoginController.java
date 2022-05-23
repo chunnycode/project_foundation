@@ -36,11 +36,11 @@ public class LoginController {
     }
 
     //토큰 재발급 요청
-    @PostMapping("/reissue")
+    @PostMapping("/issue")
     public ResponseEntity reissueToken(HttpServletRequest request) throws Exception {
         return ResponseEntity
                 .ok()
-                .body(loginService.reissueToken(request));
+                .body(loginService.issueAccessToken(request));
     }
 
 

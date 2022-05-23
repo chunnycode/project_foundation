@@ -7,6 +7,7 @@ import com.sample.shop.login.jwt.TokenResponse;
 import com.sample.shop.shared.repository.MemberRepository;
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -49,29 +50,31 @@ public class LoginServiceImpl implements LoginService{
 
     @Override
     @Transactional
-    public TokenResponse reissueToken(HttpServletRequest request){
+    public TokenResponse issueAccessToken(HttpServletRequest request) throws Exception{
 
         String accessToken = null;
         String refreshToken = tokenProvider.resolveRefreshToken(request);
 
-        if(tokenProvider.isValidRefreshToken(refreshToken)){     //들어온 Refresh 토큰이 유효한지
+        if(tokenProvider.isValidRefreshToken(refreshToken)){ // Refresh 토큰 자체가 유효한지
 
             log.info("Refresh Token is valid.");
             Claims claimsToken = tokenProvider.getClaimsRefreshToken(refreshToken);
 
             String memberId = (String)claimsToken.get("memberId");
-            Optional<Member> member = memberRepository.findByMemberId(memberId);
-            String savedToken =  member.get().getRefreshToken();
+            Member member = memberRepository.findByMemberId(memberId).orElseThrow(IllegalArgumentException::new);
+            String savedToken =  member.getRefreshToken();
             log.info("Saved Token is " + savedToken);
 
-            if(refreshToken.equals(savedToken)) {
+            if(refreshToken.equals(savedToken)) { // Refresh Token이 저장된 값과 동일한지
                 log.info("Access reissued.");
                 accessToken = tokenProvider.createAccessToken(memberId);
-            } else{
+                member.accessUpdate(accessToken);
+            } else {
                 log.info("Refresh Token Tampered.");
+                throw new Exception("Refresh Token 불일치합니다.");
             }
         } else{
-            // Refresh Token is not valid.
+            throw new Exception("Refresh Token이 유효하지 않습니다.");
         }
 
         return TokenResponse.builder()
