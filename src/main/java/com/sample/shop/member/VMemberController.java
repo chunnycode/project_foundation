@@ -1,4 +1,4 @@
-package com.sample.shop.pages;
+package com.sample.shop.member;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Slf4j
 @Controller
 @RequestMapping("/member")
-public class MemberPageController {
+public class VMemberController {
 
-	@GetMapping("/login")
+	@GetMapping("/login/v")
 	public String getLoginPage(Model model){
 		return "/member/login";
 	}
 
-	@GetMapping("/registration")
+	@GetMapping("/registration/v")
 	public String getRegistrationPage(Model model){
 		return "/member/registration";
 	}

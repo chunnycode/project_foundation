@@ -1,4 +1,4 @@
-package com.sample.shop.login.jwt;
+package com.sample.shop.shared.jwt;
 
 import lombok.Builder;
 import lombok.Getter;

@@ -1,13 +1,12 @@
 package com.sample.shop.login.service;
 
 import com.sample.shop.login.dto.LoginDto;
-import com.sample.shop.login.entity.Member;
-import com.sample.shop.login.jwt.TokenProvider;
-import com.sample.shop.login.jwt.TokenResponse;
+import com.sample.shop.member.entity.Member;
+import com.sample.shop.shared.jwt.TokenProvider;
+import com.sample.shop.shared.jwt.TokenResponse;
 import com.sample.shop.shared.repository.MemberRepository;
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,8 +14,6 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
-import java.util.Date;
-import java.util.Optional;
 
 @Service
 @Slf4j

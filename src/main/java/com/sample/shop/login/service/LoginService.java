@@ -1,7 +1,7 @@
 package com.sample.shop.login.service;
 
 import com.sample.shop.login.dto.LoginDto;
-import com.sample.shop.login.jwt.TokenResponse;
+import com.sample.shop.shared.jwt.TokenResponse;
 
 import javax.servlet.http.HttpServletRequest;
 

@@ -1,6 +1,6 @@
 package com.sample.shop.config;
 
-import com.sample.shop.interceptor.TokenInterceptor;
+import com.sample.shop.config.interceptor.TokenInterceptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
