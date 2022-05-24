@@ -32,9 +32,9 @@ public class Member {
 	private String accessToken;
 	private String refreshToken;
 
-	public void accessUpdate(String accessToken) {
-		this.accessToken = accessToken;
-	}
+//	public void accessUpdate(String accessToken) {
+//		this.accessToken = accessToken;
+//	}
 
 	public void refreshUpdate(String refreshToken) {
 		this.refreshToken = refreshToken;
