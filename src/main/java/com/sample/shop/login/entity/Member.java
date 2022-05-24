@@ -10,8 +10,6 @@ import java.util.Set;
 
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @Entity
 public class Member {
 
@@ -29,12 +27,7 @@ public class Member {
 	@Column(name = "password", length = 100)
 	private String password;
 
-	private String accessToken;
 	private String refreshToken;
-
-//	public void accessUpdate(String accessToken) {
-//		this.accessToken = accessToken;
-//	}
 
 	public void refreshUpdate(String refreshToken) {
 		this.refreshToken = refreshToken;

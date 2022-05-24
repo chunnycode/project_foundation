@@ -23,7 +23,7 @@ public class TokenProvider {
     @Value("${secret.refresh}")
     private String refreshKey;
 
-    private final long accessTokenValidTime = 60 * 60 * 1000L; // 1 hour
+    private final long accessTokenValidTime = 60 * 1000L; // 1 hour
     private final long refreshTokenValidTime =  7 * 24 * 60 * 60 * 1000L;   // 1 week
 
     @PostConstruct
@@ -35,7 +35,7 @@ public class TokenProvider {
     public String createAccessToken(String memberId){
 
         Claims claims = Jwts.claims();  // JWT payload 에 저장되는 정보단위
-        claims.put("memberName", memberId);
+        claims.put("memberId", memberId);
         Date now = new Date();
 
         return Jwts.builder()
@@ -65,7 +65,7 @@ public class TokenProvider {
     }
 
     public String resolveRefreshToken(HttpServletRequest request) {
-        log.info("RefreshToken is " + request.getHeader("RefreshToken"));
+        log.info("RefreshToken is " + request.getHeader("refreshToken"));
         return request.getHeader("refreshToken");
     }
 
@@ -93,6 +93,7 @@ public class TokenProvider {
             log.info("Access memberId: " + accessClaims.get("memberId"));
             return true;
         } catch (ExpiredJwtException exception) {
+            log.info("Access expireTime: " + exception.getClaims().getExpiration());
             log.info("Token Expired memberId : " + exception.getClaims().get("memberId"));
             return false;
         } catch (JwtException exception) {
@@ -113,7 +114,7 @@ public class TokenProvider {
             System.out.println("Refresh memberId: " + accessClaims.get("memberId"));
             return true;
         } catch (ExpiredJwtException exception) {
-            System.out.println("Token Expired memberName : " + exception.getClaims().get("memberId"));
+            System.out.println("Token Expired memberId : " + exception.getClaims().get("memberId"));
             return false;
         } catch (JwtException exception) {
             System.out.println("Token Tampered");
@@ -123,5 +124,13 @@ public class TokenProvider {
             return false;
         }
     }
+
+    /*public boolean isOnlyExpiredAccessToken(String token) {
+        Claims accessClaims = getClaimsAccessToken(token).;
+        if(!accessClaims.getExpiration().before(new Date())) {
+            return true;
+        }
+        return false;
+    }*/
 
 }
