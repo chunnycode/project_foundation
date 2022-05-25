@@ -7,11 +7,10 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "authority")
-@Getter
-@Setter
 @NoArgsConstructor
 public class Authority {
 
+	// 권한에 따른 Security 구현을 위해 남겨둠
 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
