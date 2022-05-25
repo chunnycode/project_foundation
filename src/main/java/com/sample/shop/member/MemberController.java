@@ -1,6 +1,7 @@
 package com.sample.shop.member;
 
 import com.sample.shop.login.dto.LoginDto;
+import com.sample.shop.member.dto.MemberJoinDto;
 import com.sample.shop.member.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -17,11 +18,14 @@ public class MemberController {
 		this.memberService = memberService;
 	}
 
-	@PostMapping("/login")
-	public ResponseEntity login(@RequestBody LoginDto loginDto) throws Exception {
+	@PostMapping("/join")
+	public ResponseEntity join(@RequestBody MemberJoinDto memberJoinDto) throws Exception {
 		return null;
 		/*return ResponseEntity
 				.ok()
 				.body(); // memberService.join(joinDto)*/
 	}
+
+
+
 }
