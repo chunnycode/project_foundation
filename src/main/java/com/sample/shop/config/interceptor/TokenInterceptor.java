@@ -1,5 +1,6 @@
 package com.sample.shop.config.interceptor;
 
+import com.sample.shop.shared.jwt.TokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
