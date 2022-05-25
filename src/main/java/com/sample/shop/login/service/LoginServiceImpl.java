@@ -42,7 +42,8 @@ public class LoginServiceImpl implements LoginService{
 
         member.refreshUpdate(refreshToken);
 
-        return TokenResponse.builder()
+        return new TokenResponse
+                .Builder()
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
                 .build();
@@ -68,7 +69,8 @@ public class LoginServiceImpl implements LoginService{
             throw new Exception("Refresh Token이 유효하지 않습니다.");
         }
 
-        return TokenResponse.builder()
+        return new TokenResponse
+                .Builder()
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
                 .build();

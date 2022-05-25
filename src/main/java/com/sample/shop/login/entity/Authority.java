@@ -9,7 +9,6 @@ import javax.persistence.*;
 @Table(name = "authority")
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
 public class Authority {
 
