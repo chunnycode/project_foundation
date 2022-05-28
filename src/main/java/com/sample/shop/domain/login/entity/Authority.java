@@ -1,6 +1,6 @@
-package com.sample.shop.login.entity;
+package com.sample.shop.domain.login.entity;
 
-import com.sample.shop.member.entity.Member;
+import com.sample.shop.domain.member.entity.Member;
 import lombok.*;
 
 import javax.persistence.*;

@@ -1,4 +1,4 @@
-package com.sample.shop.login.dto;
+package com.sample.shop.domain.login.dto;
 
 import lombok.Getter;
 

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class SampleAspect {
 
-	@Pointcut("execution(* com.sample.shop.login.LoginController.*(..))")
+	@Pointcut("execution(* com.sample.shop.web.login.RestLoginController.*(..))")
 	private void doExecute() {}
 
 	@Around("doExecute()")

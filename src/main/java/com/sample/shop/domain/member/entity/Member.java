@@ -1,4 +1,4 @@
-package com.sample.shop.member.entity;
+package com.sample.shop.domain.member.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

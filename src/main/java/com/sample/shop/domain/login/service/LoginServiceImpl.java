@@ -1,10 +1,10 @@
-package com.sample.shop.login.service;
+package com.sample.shop.domain.login.service;
 
-import com.sample.shop.login.dto.LoginDto;
-import com.sample.shop.member.entity.Member;
-import com.sample.shop.shared.jwt.TokenProvider;
-import com.sample.shop.shared.jwt.TokenResponse;
-import com.sample.shop.shared.repository.MemberRepository;
+import com.sample.shop.domain.login.dto.LoginDto;
+import com.sample.shop.domain.member.entity.Member;
+import com.sample.shop.domain.shared.jwt.TokenProvider;
+import com.sample.shop.domain.shared.jwt.TokenResponse;
+import com.sample.shop.domain.shared.repository.MemberRepository;
 import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;

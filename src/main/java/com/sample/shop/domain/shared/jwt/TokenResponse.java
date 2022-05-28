@@ -1,7 +1,6 @@
-package com.sample.shop.shared.jwt;
+package com.sample.shop.domain.shared.jwt;
 
 import lombok.Getter;
-import ognl.Token;
 
 @Getter
 public class TokenResponse {

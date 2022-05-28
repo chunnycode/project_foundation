@@ -1,8 +1,7 @@
-package com.sample.shop.login;
+package com.sample.shop.web.login;
 
-import com.sample.shop.login.dto.LoginDto;
-import com.sample.shop.login.service.LoginService;
-import lombok.Builder;
+import com.sample.shop.domain.login.dto.LoginDto;
+import com.sample.shop.domain.login.service.LoginService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,11 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 @RestController
 @RequestMapping("/api/auth")
-public class LoginController {
+public class RestLoginController {
 
     private final LoginService loginService;
 
-    public LoginController(LoginService loginService) {
+    public RestLoginController(LoginService loginService) {
         this.loginService = loginService;
     }
 
