@@ -1,4 +1,4 @@
-package com.sample.shop.domain.shared.repository;
+package com.sample.shop.domain.login;
 
 import com.sample.shop.domain.login.entity.Authority;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,6 +1,6 @@
 package com.sample.shop.domain.login.entity;
 
-import com.sample.shop.domain.member.entity.Member;
+import com.sample.shop.domain.member.entity.Member2;
 import lombok.*;
 
 import javax.persistence.*;
@@ -24,7 +24,7 @@ public class Authority {
 
 	@ManyToOne
 	@JoinColumn(name = "member_idx")
-	private Member member;
+	private Member2 member;
 
 	public void accessUpdate(String accessToken) {
 		this.accessToken = accessToken;

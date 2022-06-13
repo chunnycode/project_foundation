@@ -1,10 +1,10 @@
 package com.sample.shop.domain.login.service;
 
 import com.sample.shop.domain.login.dto.LoginDto;
-import com.sample.shop.domain.member.entity.Member;
-import com.sample.shop.domain.shared.jwt.TokenProvider;
-import com.sample.shop.domain.shared.jwt.TokenResponse;
-import com.sample.shop.domain.shared.repository.MemberRepository;
+import com.sample.shop.domain.member.entity.Member2;
+import com.sample.shop.shared.jwt.TokenProvider;
+import com.sample.shop.shared.jwt.TokenResponse;
+import com.sample.shop.domain.member.repository.MemberJPARepository;
 import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,11 +17,11 @@ import javax.transaction.Transactional;
 @Slf4j
 public class LoginServiceImpl implements LoginService{
 
-    private final MemberRepository memberRepository;
+    private final MemberJPARepository memberRepository;
     private final PasswordEncoder passwordEncoder;
     private final TokenProvider tokenProvider;
 
-    public LoginServiceImpl(MemberRepository memberRepository, PasswordEncoder passwordEncoder, TokenProvider tokenProvider) {
+    public LoginServiceImpl(MemberJPARepository memberRepository, PasswordEncoder passwordEncoder, TokenProvider tokenProvider) {
         this.memberRepository = memberRepository;
         this.passwordEncoder = passwordEncoder;
         this.tokenProvider = tokenProvider;
@@ -31,7 +31,7 @@ public class LoginServiceImpl implements LoginService{
     @Transactional
     public TokenResponse doLogin(LoginDto loginDto) throws Exception {
 
-        Member member = memberRepository.findByMemberId(loginDto.getMemberId())
+        Member2 member = memberRepository.findByMemberId(loginDto.getMemberId())
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
         if (!passwordEncoder.matches(loginDto.getPassword(), member.getPassword())) {
             throw new Exception("비밀번호가 일치하지 않습니다.");

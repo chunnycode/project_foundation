@@ -2,31 +2,20 @@ package com.sample.shop.domain.member.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 
-@Entity
 @Getter
+@Setter
 @NoArgsConstructor
 public class Member {
+	private long id;
 
-	@Id
-	@Column(name = "member_idx")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long memberIdx;
-
-	@Column(name = "member_id", length = 50, unique = true)
-	private String memberId;
-
-	@Column(name = "member_name", length = 50, unique = true)
-	private String memberName;
-
-	@Column(name = "password", length = 100)
+	@NotEmpty
+	private String loginId;
+	@NotEmpty
+	private String name;
+	@NotEmpty
 	private String password;
-
-	private String refreshToken;
-
-	public void refreshUpdate(String refreshToken) {
-		this.refreshToken = refreshToken;
-	}
 }

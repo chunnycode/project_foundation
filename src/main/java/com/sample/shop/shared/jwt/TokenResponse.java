@@ -1,4 +1,4 @@
-package com.sample.shop.domain.shared.jwt;
+package com.sample.shop.shared.jwt;
 
 import lombok.Getter;
 

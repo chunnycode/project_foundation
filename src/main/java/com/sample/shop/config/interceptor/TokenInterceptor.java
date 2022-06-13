@@ -1,6 +1,6 @@
 package com.sample.shop.config.interceptor;
 
-import com.sample.shop.domain.shared.jwt.TokenProvider;
+import com.sample.shop.shared.jwt.TokenProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
