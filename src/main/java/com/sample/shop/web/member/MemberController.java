@@ -38,6 +38,7 @@ public class MemberController {
 		return "redirect:/";
 	}
 
+
 	@PostMapping("/join")
 	public ResponseEntity join(@RequestBody MemberJoinDto memberJoinDto) throws Exception {
 		return null;
